@@ -24,8 +24,8 @@ class Elevator {
   }
 
   _passengersEnter(floor) {
-    if (this.waitingList.find(obj => obj.originFloor === floor)) {
-      let pers = this.obj;
+    const pers = this.waitingList.find(obj => obj.originFloor === floor);
+    if (pers) {
       this.passengers.push(pers);
       this.waitingList = _.without(this.waitingList, pers);
       this.requests.push(pers.destinationFloor);
@@ -33,7 +33,8 @@ class Elevator {
     }
   }
   _passengersLeave(floor) {
-    if (this.passengers.find(obj => obj.destinationFloor === floor)) {
+    const pers = this.waitingList.find(obj => obj.destinationFloor === floor);
+    if (pers) {
       this.passengers = _without(this.passengers, obj);
       console.log(`${obj.name} has left the elevator.`);
     }
