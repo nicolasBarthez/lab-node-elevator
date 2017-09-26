@@ -20,7 +20,7 @@ class Elevator {
   }
   update() {
     this.log();
-    return this.floor < this.requests[0] ? this.floorUp() : this.floorDown();
+    return this.floor <= this.requests[0] ? this.floorUp() : this.floorDown();
   }
 
   _passengersEnter(floor) {
@@ -31,7 +31,6 @@ class Elevator {
       this.requests.push(pers.destinationFloor);
       this.requests.shift();
       console.log(`${pers.name} has enter the elevator.`);
-      console.log(this.requests);
     }
   }
   _passengersLeave(floor) {
