@@ -20,7 +20,7 @@ class Elevator {
   }
   update() {
     this.log();
-    return this.floor < this.requests ? this.floorUp() : this.floorDown();
+    return this.floor < this.requests[0] ? this.floorUp() : this.floorDown();
   }
 
   _passengersEnter(floor) {
@@ -29,14 +29,17 @@ class Elevator {
       this.passengers.push(pers);
       this.waitingList = _.without(this.waitingList, pers);
       this.requests.push(pers.destinationFloor);
+      this.requests.shift();
       console.log(`${pers.name} has enter the elevator.`);
+      console.log(this.requests);
     }
   }
   _passengersLeave(floor) {
-    const pers = this.waitingList.find(obj => obj.destinationFloor === floor);
+    const pers = this.passengers.find(obj => obj.destinationFloor === floor);
     if (pers) {
-      this.passengers = _without(this.passengers, obj);
-      console.log(`${obj.name} has left the elevator.`);
+      this.passengers = _.without(this.passengers, pers);
+      this.requests.shift();
+      console.log(`${pers.name} has left the elevator.`);
     }
   }
 
